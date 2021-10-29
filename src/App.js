@@ -1,40 +1,51 @@
 import { useState } from "react";
-import trips from "./data/trips";
+import { useTrips } from "./server";
+import { AddTrip } from "./AddTrip";
 
 function App() {
+  const { trips, addTrip, addLike, updateTrips } = useTrips();
   return (
     <div className="App">
-      <Header />
+      <Header onUpdate={updateTrips} />
       {(function renderTrips() {
         const tripcomponents = [];
+        if (!trips) return null;
         for (let i = 0; i < trips.length; i++) {
           const trip = trips[i];
+          function onAddLike() {
+            addLike(trip.id);
+          }
           tripcomponents.push(
             <Trip
               key={trip.id}
               username={trip.username}
               caption={trip.caption}
               position={trip.position}
+              likes={trip.likes}
+              onAddLike={onAddLike}
             >
-              <Image src={trip.image} alt={trip.caption}/>
+              <Image src={trip.image} alt={trip.caption} />
             </Trip>
           );
         }
         return tripcomponents;
       })()}
+      <AddTrip onAddTrip={addTrip} />
     </div>
   );
 }
 
-function Header() {
+function Header(props) {
   return (
     <div className="site-header">
       <div className="title">
-        <h1>Trips</h1>
+        <button className="emoji-button" onClick={props.onUpdate}>
+          <h1>⛰️</h1>
+        </button>
       </div>
     </div>
   );
-};
+}
 
 function Trip(props) {
   function makeEarthLink(position) {
@@ -55,25 +66,21 @@ function Trip(props) {
         <a className="earth" href={makeEarthLink(props.position)}>
           🌍
         </a>
-        <Likes />
+        <Likes likes={props.likes} onAddLike={props.onAddLike} />
       </div>
     </div>
   );
-};
+}
 
 function Image(props) {
   return <img src={props.src} alt={props.alt} className="image" />;
-};
+}
 
-function Likes() {
-  const [likes, setLikes] = useState(0);
-  function addLike() {
-    setLikes(likes + 1);
-  }
+function Likes(props) {
   return (
     <div className="likes">
-      Likes: {likes}
-      <button className="like-button" onClick={addLike}>
+      Likes: {props.likes}
+      <button className="like-button" onClick={props.onAddLike}>
         👍
       </button>
     </div>
