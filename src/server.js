@@ -1,29 +1,34 @@
 import { useEffect, useState } from "react";
 import { username } from "./username";
 const API = "http://localhost:4000/api";
+// const API = "https://triptip.azurewebsites.net/api";
 
 export function useTrips() {
   const [tripFeed, setTripFeed] = useState(null);
-  function getTrips(){
-      getTripFeed().then((data) => setTripFeed(data));
+  function getTrips() {
+    getTripFeed().then((data) => setTripFeed(data));
   }
   useEffect(() => {
-      getTrips()
+    getTrips();
   }, []);
 
   return {
     trips: tripFeed,
     addTrip: async (trip) => {
-        await uploadTrip(trip)
-        getTrips();
+      await uploadTrip(trip);
+      getTrips();
     },
     addLike: async (tripId) => {
-        await uploadLike(tripId);
-        getTrips()
+      await uploadLike(tripId);
+      getTrips();
+    },
+    addComment: async (tripId, comment) => {
+      await uploadComment(tripId, comment);
+      getTrips();
     },
     updateTrips: async () => {
-        getTrips();
-    }
+      getTrips();
+    },
   };
 }
 const getTripFeed = async () => {
@@ -44,7 +49,17 @@ export async function uploadTrip(trip) {
 
 async function uploadLike(id) {
   const newLikes = await fetch(`${API}/trip/${id}/like`, {
-    method: "put",
+    method: "PUT",
   }).then((resp) => resp.json());
   return newLikes;
+}
+
+async function uploadComment(id, comment) {
+  await fetch(`${API}/trip/${id}/comment`, {
+    method: "PUT",
+    body: JSON.stringify({ text: comment, username: username }),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
 }

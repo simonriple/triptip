@@ -1,0 +1,328 @@
+:root {
+    --app-background: #fafafa;
+    --dark-text: #121212;
+    --light-text: #ebebeb;
+  
+    --app-text: var(--dark-text);
+  
+    --component-background: #ffffff;
+    --component-hover: #e2e2e2;
+  
+    --input-text: var(--dark-text);
+    --input-border: #585858;
+    --input-placeholder: #9e9e9e;
+  
+    --comment-button-enabled: var(--component-background);
+    --comment-button-hover: var(--component-hover);
+  
+    --add-image-icon: var(--dark-text);
+  }
+  
+  html {
+    box-sizing: border-box;
+  }
+  body {
+    margin: 0px;
+  }
+  
+  *,
+  *::before,
+  *::after {
+    box-sizing: inherit;
+  }
+  
+  body {
+    background-color: var(--app-background);
+    margin: none;
+  }
+  
+  .App {
+    font-family: sans-serif;
+    margin: 0 auto;
+  }
+  
+  .emoji-button {
+    appearance: none;
+    border: 0;
+    border-radius: 0;
+    background: none;
+    cursor: pointer;
+    transition: all 0.1s ease-out;
+  }
+  .emoji-button:hover {
+    transform: scale(1.05);
+  }
+  .site-header {
+    margin-bottom: 50px;
+    width: 100%;
+    height: 60px;
+    background-color: #ffffff;
+    border-bottom: 1px solid lightgrey;
+    text-align: center;
+  }
+  
+  .site-header h1 {
+    color: var(--app-text);
+    margin: 0;
+    padding: 5px;
+  }
+  
+  .trip {
+    margin: 0 auto;
+    max-width: 500px;
+    margin-bottom: 50px;
+    border: 1px solid lightgrey;
+    border-radius: 4px;
+  }
+  
+  .post .author {
+    background-color: var(--component-background);
+    color: var(--dark-text);
+    font-weight: bold;
+    margin: 0;
+    padding: 10px;
+    border-radius: 4px 4px 0 0;
+  }
+  
+  .trip .image {
+    display: block;
+    width: 100%;
+    margin: 0;
+  }
+  
+  .trip .header {
+    background-color: var(--component-background);
+    color: var(--dark-text);
+    margin: 0;
+    padding: 10px;
+    border-radius: 4px 4px 0 0;
+    position: relative;
+  }
+  
+  .trip .footer {
+    background-color: var(--component-background);
+    padding: 10px;
+    border-radius: 0 0 4px 4px;
+  }
+  
+  .trip .earth {
+    text-decoration: none;
+  }
+  
+  .trip .likes {
+    color: var(--app-text);
+    margin: 0;
+    padding: 5px 10px;
+    text-align: left;
+    font-size: 80%;
+    display: inline-block;
+  }
+  
+  .trip .like-button {
+    appearance: none;
+    border: 0;
+    border-radius: 0;
+    background: none;
+    cursor: pointer;
+    transition: all 0.1s ease-out;
+  }
+  
+  @keyframes thumb {
+    0% {
+      transform: scale(1.25);
+    }
+    25%,
+    75% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.5);
+    }
+    100% {
+      transform: scale(1.25);
+    }
+  }
+  
+  .trip .like-button:focus {
+    outline: none;
+  }
+  
+  .trip .like-button:hover {
+    animation: thumb 1s ease-in-out infinite;
+    outline: none;
+  }
+  
+  .comments {
+    font-size: 90%;
+  }
+  
+  .comment {
+    background-color: var(--component-background);
+    border-radius: 4px 4px 4px 4px;
+    padding: 5px;
+    margin-bottom: 5px;
+  }
+  
+  .comment:hover {
+    background-color: var(--component-hover);
+  }
+  
+  .comment .comment-text {
+    margin-left: 10px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+  }
+  
+  .comment .comment-username {
+    font-weight: bold;
+    margin-top: 2px;
+    margin-bottom: 2px;
+  }
+  
+  .comment-form {
+    display: flex;
+    height: 40px;
+  }
+  
+  .comment-form input {
+    background-color: var(--app-background);
+    border: 1px solid var(--input-border);
+    border-radius: 4px 0px 0px 4px;
+    color: var(--input-text);
+    padding: 10px;
+    width: 100%;
+    font-size: 90%;
+  }
+  
+  .comment-form input::placeholder {
+    color: var(--input-placeholder);
+  }
+  
+  .comment-form input:focus {
+    outline: none;
+  }
+  
+  .comment-form-button {
+    background-color: var(--comment-button-enabled);
+    border-top: 1px solid var(--input-border);
+    border-right: 1px solid var(--input-border);
+    border-bottom: 1px solid var(--input-border);
+    border-left: 0;
+    border-radius: 0px 4px 4px 0px;
+    color: var(--dark-text);
+    cursor: pointer;
+    font-size: 90%;
+    font-weight: bold;
+    width: 80px;
+  }
+  
+  .comment-form-button:hover {
+    background-color: var(--component-hover);
+  }
+  
+  .comment-form-button:focus {
+    outline: none;
+  }
+  
+  .comment-form-button-disabled {
+    background-color: var(--app-background);
+    border-top: 1px solid var(--input-border);
+    border-right: 1px solid var(--input-border);
+    border-bottom: 1px solid var(--input-border);
+    border-left: 0;
+    border-radius: 0px 4px 4px 0px;
+    color: var(--light-text);
+    font-size: 90%;
+    font-weight: bold;
+    width: 80px;
+  }
+  
+  .comment-form-button-disabled:focus {
+    outline: none;
+  }
+  
+  .camera-button {
+    appearance: none;
+    background: var(--component-background);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    padding: 15px;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    transition: all 0.2s ease-out;
+  }
+  
+  .camera-button:hover {
+    background: var(--component-hover);
+    box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.3);
+    transform: scale(1.05);
+  }
+  
+  .camera-button:focus {
+    outline: none;
+    box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.3), inset 0 0 10px rgba(0, 0, 0, 0.5);
+    transform: scale(1.05);
+  }
+  
+  .camera-button > * {
+    font-size: 2.5em;
+    color: var(--add-image-icon);
+  }
+  
+  .modal {
+    margin: 0 auto;
+    text-align: center;
+    margin-top: 100px;
+    max-width: 500px;
+    z-index: 10;
+    border: 1px solid lightgrey;
+    border-radius: 4px;
+    background-color: rgba(255, 255, 255, 1);
+  }
+  
+  .modal-container {
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    position: fixed;
+  
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    background-color: rgba(255, 255, 255, 0.5);
+  }
+  
+  .add-trip-dialog-input {
+    width: 90%;
+    padding: 10px;
+    margin: 10px;
+  }
+  
+  .add-trip-dialog-button {
+    width: 90%;
+    padding: 10px;
+    margin: 10px;
+    appearance: none;
+    background: var(--component-background);
+    border: none;
+    border-radius: 4px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    transition: all 0.2s ease-out;
+  }
+  
+  .add-trip-dialog-button:hover {
+    background: var(--component-hover);
+    box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.3);
+  }
+  
+  .close-modal-button {
+    appearance: none;
+    border: 0;
+    border-radius: 0;
+    background: none;
+    cursor: pointer;
+    transition: all 0.1s ease-out;
+  }

@@ -3,7 +3,7 @@ import { useTrips } from "./server";
 import { AddTrip } from "./AddTrip";
 
 function App() {
-  const { trips, addTrip, addLike, updateTrips } = useTrips();
+  const { trips, addTrip, addLike, addComment, updateTrips } = useTrips();
   return (
     <div className="App">
       <Header onUpdate={updateTrips} />
@@ -15,6 +15,10 @@ function App() {
           function onAddLike() {
             addLike(trip.id);
           }
+          function onAddComment(comment) {
+            console.log(comment)
+            addComment(trip.id, comment);
+          }
           tripcomponents.push(
             <Trip
               key={trip.id}
@@ -23,6 +27,8 @@ function App() {
               position={trip.position}
               likes={trip.likes}
               onAddLike={onAddLike}
+              comments={trip.comments}
+              onAddComment={onAddComment}
             >
               <Image src={trip.image} alt={trip.caption} />
             </Trip>
@@ -67,6 +73,8 @@ function Trip(props) {
           🌍
         </a>
         <Likes likes={props.likes} onAddLike={props.onAddLike} />
+        <Comments comments={props.comments} />
+        <CommentForm onAddComment={props.onAddComment} />
       </div>
     </div>
   );
@@ -85,6 +93,39 @@ function Likes(props) {
       </button>
     </div>
   );
+}
+
+function Comments(props) {
+  
+  function renderComment(comment,id) {
+    return (
+      <div key={id} className="comment">
+        <p className="comment-username">{comment.username}</p>
+        <p className="comment-text">{comment.text}</p>
+      </div>
+    );
+  }
+
+  if(!props.comments || props.comments.length === 0) return null;
+
+  return <div className="comments">{props.comments.map(renderComment)}</div>;
+}
+
+function CommentForm(props) {
+  const [comment, setComment] = useState("");
+  function onChangeComment (event) {
+    setComment(event.target.value)
+  }
+  function addComment(){
+    props.onAddComment(comment)
+    setComment("")
+  }
+  return (
+    <div className="comment-form">
+      <input value={comment} onChange={onChangeComment} placeholder="Skriv inn kommentar"/>
+      <button className="comment-form-button" onClick={addComment} >Publiser</button>
+    </div>
+  )
 }
 
 export default App;

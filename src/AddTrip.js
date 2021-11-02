@@ -41,6 +41,10 @@ export function AddTrip(props) {
       },
     });
     
+    setImageUrl("");
+    setPosition("");
+    setCaption("");
+    
     closeModal()
   }
 
