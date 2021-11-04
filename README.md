@@ -2,7 +2,7 @@
 Triptip for sharing your trips
 
 ### Running the app locally 
-Set your username in /src/username.js
+Set your username in /src/username.js  
 To run this react app locally run the following terminal commands inside the project folder.  
 - `yarn`
 - `yarn start`  
