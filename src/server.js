@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { username } from "./username";
-const API = "http://localhost:4000/api";
-// const API = "https://triptip.azurewebsites.net/api";
+//const API = "http://localhost:4000/api";
+const API = "https://triptip.azurewebsites.net/api";
 
 export function useTrips() {
   const [tripFeed, setTripFeed] = useState(null);

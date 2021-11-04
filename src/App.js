@@ -57,9 +57,9 @@ function Trip(props) {
   function makeEarthLink(position) {
     return (
       "https://www.google.com/maps/place/" +
-      position.latitude +
+      position?.latitude +
       "," +
-      position.longitude
+      position?.longitude
     );
   }
 
